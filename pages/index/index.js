@@ -192,14 +192,25 @@ Page({
     }
     this.draw()
   },
-  move(id, from, to) {
+  move(id, from, to, callback) {
     const _self = this
     const target = this.get_map(to[0], to[1])
     if (target == 0) {
       this.set_map(from[0], from[1], 0)
       this.set_map(to[0], to[1], id)
+      if (callback) {
+        console.log('callback')
+        callback()
+      }
     }
-    if (target == 2) {
+    if (target == 3) {
+      const next_to = [to[0] - from[0] + to[0], to[1] - from[1] + to[1]]
+      this.move(3, to, next_to, () => {
+        console.log('cbm')
+        this.move(id, from, to, callback)
+      })
+    }
+    if (target == 2 && id == 8) {
       // next stage 
       const {
         stage_index
@@ -209,7 +220,7 @@ Page({
       if (next < stages.length) {
         this.setData({
           stage_index: next,
-          map: stages[next]
+          map: [...stages[next]]
         })
       } else {
         // 通关
@@ -220,21 +231,20 @@ Page({
             if (res.confirm) {
               _self.setData({
                 stage_index: 0,
-                map: stages[0]
+                map: [...stages[0]]
               })
-              _self.draw()
+              _self.start()
             } else if (res.cancel) {
 
             }
           }
         })
-
       }
     }
   },
   start() {
     this.setData({
-      map: stages[this.data.stage_index]
+      map: [...stages[this.data.stage_index]]
     })
     this.draw()
   },
@@ -269,7 +279,7 @@ Page({
         })
 
         // ctx.scale(dpr, dpr)
-        load([1, 2, 8], canvas, (loaded_images) => {
+        load([1, 2, 3, 8], canvas, (loaded_images) => {
           _self.setData({
             images: loaded_images
           })
