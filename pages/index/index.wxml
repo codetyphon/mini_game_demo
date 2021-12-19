@@ -1,0 +1,51 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="stage">Stage {{stage_index+1}}</view>
+  <view class="box">
+    <view class="screen">
+      <canvas type="2d" id="myCanvas"></canvas>
+    </view>
+  </view>
+  <view class="ctrl">
+    <view class="left">
+      <view class="keys">
+
+        <view class="row">
+          <view class="block"></view>
+          <view class="block">
+            <button bindtap="up">上</button>
+          </view>
+          <view class="block"></view>
+        </view>
+
+        <view class="row">
+          <view class="block">
+            <button bindtap="left">左</button>
+          </view>
+          <view class="block">
+
+          </view>
+          <view class="block">
+            <button bindtap="right">右</button>
+          </view>
+        </view>
+
+        <view class="row">
+          <view class="block">
+
+          </view>
+          <view class="block">
+            <button bindtap="down">下</button>
+          </view>
+          <view class="block">
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="right">
+      <button>上传分数</button>
+      <button>查看排行</button>
+    </view>
+  </view>
+</view>
