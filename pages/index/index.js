@@ -218,6 +218,7 @@ Page({
 
       const next = stage_index + 1
       if (next < stages.length) {
+        const map = JSON.parse(JSON.stringify(stages[next]));
         this.setData({
           stage_index: next,
           map: [...stages[next]]
@@ -229,9 +230,10 @@ Page({
           content: '你已经通关了，是否重新玩一局？',
           success(res) {
             if (res.confirm) {
+              const map = JSON.parse(JSON.stringify(stages[0]));
               _self.setData({
                 stage_index: 0,
-                map: [...stages[0]]
+                map: map
               })
               _self.start()
             } else if (res.cancel) {
@@ -243,8 +245,9 @@ Page({
     }
   },
   start() {
+    const map = JSON.parse(JSON.stringify(stages[this.data.stage_index]));
     this.setData({
-      map: [...stages[this.data.stage_index]]
+      map: map
     })
     this.draw()
   },

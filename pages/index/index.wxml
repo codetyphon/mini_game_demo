@@ -44,8 +44,7 @@
     </view>
 
     <view class="right">
-      <button>上传分数</button>
-      <button>查看排行</button>
+      <button bindtap="start">重新开始</button>
     </view>
   </view>
 </view>
